@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rules lang="tl">
+<rules lang="tl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="rules.xsd">
 
 <!-- Start of RJ's rule-->
   <rule id="IKA_AT_NUMERO" name="Ika at Numero (Nawawalang Gitling)">
@@ -38,20 +38,6 @@
 
 <!-- end of RJ's rule-->
 
-<!-- start of shen's rule (NOT FINAL)-->
-    <rule id = "KATABI_PAREHO_KATINIG" name = "Katabing Parehong Katinig">
-        <pattern>
-            <marker>
-                <token regexp="yes">.*(?i)([^aeiou\s\d\W])\1.*</token>
-            </marker>
-        </pattern>
-        <message></message>
-        <suggestion><match no="1" regexp_match=".*(?i)([^aeiou\s\d\W])\1.*" regexp_replace="$1"></suggestion>
-        <example correction="korek">Nakuha ko na ang aking exam scores ay ako ay <marker>correct</marker> sa lahat.</example>
-
-    </rule>
-<!-- end of shen's rule (NOT FINAL)-->
-
 <!-- start of shen's rule (FINAL)-->
     <rule id = "CT_SA_DULO" name = "CT sa Dulo ng Salita (Walang KT)">
         <antipattern>
@@ -60,13 +46,15 @@
         
         <pattern>
           <marker>
-            <token regexp="yes">.*(?i).+ct(s)?</token>
+            <token regexp="yes">(?i).+ct(s)?</token>
           </marker>
         </pattern>
         
-        <message>Ayon sa Manwal sa Masinop na Pagsusulat section 6.2, ang hiram na salita na nagtatapos sa CT ay dapat matapos sa K imbes na KT.</message>
-        <suggestion><match no="1" regexp_match="(?i)(.+)ct" regexp_replace="$1k" /></suggestion>
-        <example correction="aspek">Siya ay may positibong <marker>aspect</marker> sa buhay </example>
+        <message>Ayon sa Manwal sa Masinop na Pagsusulat seksiyon 6.2, ang hiram na salita na nagtatapos sa CT ay dapat matapos sa K imbes na KT.</message>
+        <suggestion><match no="1" regexp_match="(?i)(.+)ct(s)?" regexp_replace="$1k$2" /></suggestion>
+        <example correction="aspek">Siya ay may positibong <marker>aspect</marker> sa buhay.</example>
+        <example correction="aspeks">Maraming <marker>aspects</marker> ang dapat tingnan sa pagtaas ng petrolyong langis.</example>
+        <example> Si <marker>Brandict</marker> ay magaling mag Tagalog.</example>
 
     </rule>
 <!-- end of shen's rule (FINAL)-->
