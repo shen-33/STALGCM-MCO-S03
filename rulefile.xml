@@ -1,62 +1,75 @@
-<?xml version="1.0" encoding="utf-8"?>
-<rules lang="tl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="rules.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<rules lang="tl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../rules.xsd">
 
-<!-- Start of RJ's rule-->
-  <rule id="IKA_AT_NUMERO" name="Ika at Numero (Nawawalang Gitling)">
-    <pattern>
-      <marker>
-        <token regexp="yes">ika</token>
-        <token regexp="yes">\d+<exception regexp="yes">[a-zA-Z]+</exception></token>
-      </marker>
-    </pattern>
-    <message>Ayon sa Ortograpiyang Pambansa, kapag ikinakabit ang unlaping "ika-" sa numero, kailangan gumamit ng gitling.</message>
-    <suggestion><match no="1"/>-<match no="2"/></suggestion>
-    <example correction="ika-4">Pumasok ang Lady Spikers sa <marker>ika 4</marker> na set nang may kumpiyansa.</example>
-    <example>Pumasok ang Lady Spikers sa ika-4 na set nang may kumpiyansa.</example>
-  </rule>
-
-  <rule id="TAGA_MAKA_PANTANGI" name="Taga/Maka at Pangngalang Pantangi (Nawawalang Gitling)">
-    <pattern>
-      <marker>
-        <token regexp="yes">taga|maka</token>
-        <token regexp="yes">(?-i)[A-Z][a-z]+<exception regexp="yes">Diyos</exception></token>
-      </marker>
-    </pattern>
-    <message>Ginagamitan ng gitling ang unlaping nagtatapos sa patinig kapag ikinakabit sa pangngalang pantangi.</message>
-    <suggestion><match no="1"/>-<match no="2"/></suggestion>
-    <example correction="taga-DLSU">Isang <marker>taga DLSU</marker> ang nakasungkit ng gintong medalya.</example>
-  </rule>
-
-  <rule id="IBAT_IBA_SOBRANG_GITLING" name="Iba't iba (Sobrang Gitling)">
-    <pattern>
-      <token regexp="yes" spacebefore="yes">iba't-iba<exception regexp="yes">iba't iba</exception></token>
-    </pattern>
-    <message>Ayon sa Manwal sa Masinop na Pagsulat, hindi na nilalagyan ng gitling ang inuulit na salita kung mayroon na itong kudlit.</message>
-    <suggestion><match no="1" regexp_match="(iba't)-(iba)" regexp_replace="$1 $2"/></suggestion>
-    <example correction="iba't iba">May <marker>iba't-iba</marker> silang diskarte sa paglalaro ng football.</example>
-  </rule>
-
-<!-- end of RJ's rule-->
-
-<!-- start of shen's rule (FINAL)-->
-    <rule id = "CT_SA_DULO" name = "CT sa Dulo ng Salita (Walang KT)">
-        <antipattern>
-          <token regexp="yes">[A-Z][a-z]+ct(s)?</token>
-        </antipattern>
-        
-        <pattern>
-          <marker>
-            <token regexp="yes">(?i).+ct(s)?</token>
-          </marker>
-        </pattern>
-        
-        <message>Ayon sa Manwal sa Masinop na Pagsusulat seksiyon 6.2, ang hiram na salita na nagtatapos sa CT ay dapat matapos sa K imbes na KT.</message>
-        <suggestion><match no="1" regexp_match="(?i)(.+)ct(s)?" regexp_replace="$1k$2" /></suggestion>
-        <example correction="aspek">Siya ay may positibong <marker>aspect</marker> sa buhay.</example>
-        <example correction="aspeks">Maraming <marker>aspects</marker> ang dapat tingnan sa pagtaas ng petrolyong langis.</example>
-        <example> Si <marker>Brandict</marker> ay magaling mag Tagalog.</example>
-
+  <category name="RJ's Rules">
+    <rule id="IKA_AT_NUMERO" name="Ika at Numero (Nawawalang Gitling)">
+      <pattern>
+        <marker>
+          <token>ika</token>
+          <token regexp="yes">\d+</token>
+        </marker>
+      </pattern>
+      <message>Ayon sa Ortograpiyang Pambansa, kapag ikinakabit ang unlaping "ika-" sa numero, kailangan gumamit ng gitling.</message>
+      <suggestion><match no="1"/>-<match no="2"/></suggestion>
+      <example correction="ika-4">Pumasok ang Lady Spikers sa <marker>ika 4</marker> na set.</example>
     </rule>
-<!-- end of shen's rule (FINAL)-->
+
+    <rule id="TAGA_MAKA_PANTANGI" name="Taga/Maka at Pangngalang Pantangi (Nawawalang Gitling)">
+      <pattern>
+        <marker>
+          <token regexp="yes">taga|maka</token>
+          <token regexp="yes">[A-Z][a-z]+<exception>Diyos</exception></token>
+        </marker>
+      </pattern>
+      <message>Ginagamitan ng gitling ang unlaping nagtatapos sa patinig kapag ikinakabit sa pangngalang pantangi.</message>
+      <suggestion><match no="1"/>-<match no="2"/></suggestion>
+      <example correction="taga-DLSU">Isang <marker>taga DLSU</marker> ang nakasungkit ng ginto.</example>
+    </rule>
+
+    <rule id="IBAT_IBA_SOBRANG_GITLING" name="Iba't iba (Sobrang Gitling)">
+      <pattern>
+        <marker>
+          <token regexp="yes">iba't-iba</token>
+        </marker>
+      </pattern>
+      <message>Ayon sa Manwal sa Masinop na Pagsulat, hindi na nilalagyan ng gitling ang inuulit na salita kung mayroon na itong kudlit.</message>
+      <suggestion>iba't iba</suggestion>
+      <example correction="iba't iba">May <marker>iba't-iba</marker> silang diskarte.</example>
+    </rule>
+  </category>
+
+  <category name="Shen's Rule">
+    <rule id="CT_SA_DULO" name="CT sa Dulo ng Salita (Walang KT)">
+      <antipattern>
+        <token regexp="yes">[A-Z][a-z]+ct(s)?</token>
+      </antipattern>
+      <pattern>
+        <marker>
+          <token regexp="yes">(?i).+ct(s)?</token>
+        </marker>
+      </pattern>
+      <message>Ayon sa Manwal sa Masinop na Pagsusulat seksiyon 6.2, ang hiram na salita na nagtatapos sa CT ay dapat matapos sa K imbes na KT.</message>
+      <suggestion><match no="1" regexp_match="(?i)(.+)ct(s)?" regexp_replace="$1k$2" /></suggestion>
+      <example correction="aspek">Siya ay may positibong <marker>aspect</marker> sa buhay.</example>
+      <example correction="aspeks">Maraming <marker>aspects</marker> ang dapat tingnan.</example>
+    </rule>
+  </category>
+
+  <category name="Shao's Rule">
+    <rule id="NG_NANG_ADJ_CHECK" name="Ng vs Nang with Adjectives">
+      <pattern>
+        <token regexp="yes">(?i)tumakbo|lumakad|nagsalita|kumain|sumulat|tumawa|nagluto|tumigil|lumaban|sumigaw</token>
+        <token regexp="yes">siya|ako|ikaw|kami|kayo|sila|tayo|ito</token>
+        <marker>
+          <token>ng</token>
+        </marker>
+        <token regexp="yes">mabilis|mabagal|maayos|malakas|mahina|mabuti|marami|tahimik</token>
+      </pattern>
+      <message>Gamitin ang 'nang' sa halip na 'ng' bilang pang-abay na naglalarawan sa pandiwa.</message>
+      <suggestion>nang</suggestion>
+      <example correction="nang">Tumakbo siya <marker>ng</marker> mabilis.</example>
+      <example>Tumakbo siya nang mabilis.</example>
+    </rule>
+  </category>
 
 </rules>
