@@ -1,75 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rules lang="tl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../rules.xsd">
+<?xml-stylesheet type="text/xsl" href="../print.xsl" ?>
+<?xml-stylesheet type="text/css" href="../rules.css" 
+title="Easy editing stylesheet" ?>
+<rules lang="tl" xsi:noNamespaceSchemaLocation="../rules.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<category name="RJ's Rules">
+		<rule id="TAGA_MAKA_PANTANGI" name="taga/maka (taga-/maka-)">
+			<pattern case_sensitive="no" mark_from="0">
+				<token regexp="yes">taga|maka</token>
+				<token regexp="yes">[A-Z].*<exception>Diyos</exception></token>
+			</pattern>
+			<message> Do you mean <suggestion><match no="1"/>-<match no="2"/></suggestion>? Ginagamitan ng gitling ang unlaping nagtatapos sa patinig kapag ikinakabit sa pangngalang pantangi.</message>
+			<short>Nawawalang Gitling</short>
+			<example correction="taga-DLSU" type="incorrect">Isang <marker>taga DLSU</marker> ang nakasungkit ng ginto.</example>
+			<example type="correct">Isang <marker>taga-DLSU</marker> ang nakasungkit ng ginto.</example>
+		</rule>
+	</category>
 
-  <category name="RJ's Rules">
-    <rule id="IKA_AT_NUMERO" name="Ika at Numero (Nawawalang Gitling)">
-      <pattern>
-        <marker>
-          <token>ika</token>
-          <token regexp="yes">\d+</token>
-        </marker>
-      </pattern>
-      <message>Ayon sa Ortograpiyang Pambansa, kapag ikinakabit ang unlaping "ika-" sa numero, kailangan gumamit ng gitling.</message>
-      <suggestion><match no="1"/>-<match no="2"/></suggestion>
-      <example correction="ika-4">Pumasok ang Lady Spikers sa <marker>ika 4</marker> na set.</example>
-    </rule>
+	<category name="Shen's Rule">
+		<rule id="CT_SA_DULO" name="ct (k)">
+			<pattern case_sensitive="no" mark_from="0">
+				<token regexp="yes">.*ct(s)?</token>
+			</pattern>
+			<message> Do you mean <suggestion><match no="1" regexp_match="(?i)(.*)ct(s)?" regexp_replace="$1k$2"/></suggestion>? Ayon sa Manwal sa Masinop na Pagsusulat seksiyon 6.2, ang hiram na salita na nagtatapos sa CT ay dapat matapos sa K imbes na KT.</message>
+			<short>Walang KT</short>
+			<example correction="aspek" type="incorrect">Siya ay may positibong <marker>aspect</marker> sa buhay.</example>
+			<example correction="aspeks" type="incorrect">Maraming <marker>aspects</marker> ang dapat tingnan.</example>
+			<example type="correct">Siya ay may positibong <marker>aspek</marker> sa buhay.</example>
+		</rule>
+	</category>
 
-    <rule id="TAGA_MAKA_PANTANGI" name="Taga/Maka at Pangngalang Pantangi (Nawawalang Gitling)">
-      <pattern>
-        <marker>
-          <token regexp="yes">taga|maka</token>
-          <token regexp="yes">[A-Z][a-z]+<exception>Diyos</exception></token>
-        </marker>
-      </pattern>
-      <message>Ginagamitan ng gitling ang unlaping nagtatapos sa patinig kapag ikinakabit sa pangngalang pantangi.</message>
-      <suggestion><match no="1"/>-<match no="2"/></suggestion>
-      <example correction="taga-DLSU">Isang <marker>taga DLSU</marker> ang nakasungkit ng ginto.</example>
-    </rule>
-
-    <rule id="IBAT_IBA_SOBRANG_GITLING" name="Iba't iba (Sobrang Gitling)">
-      <pattern>
-        <marker>
-          <token regexp="yes">iba't-iba</token>
-        </marker>
-      </pattern>
-      <message>Ayon sa Manwal sa Masinop na Pagsulat, hindi na nilalagyan ng gitling ang inuulit na salita kung mayroon na itong kudlit.</message>
-      <suggestion>iba't iba</suggestion>
-      <example correction="iba't iba">May <marker>iba't-iba</marker> silang diskarte.</example>
-    </rule>
-  </category>
-
-  <category name="Shen's Rule">
-    <rule id="CT_SA_DULO" name="CT sa Dulo ng Salita (Walang KT)">
-      <antipattern>
-        <token regexp="yes">[A-Z][a-z]+ct(s)?</token>
-      </antipattern>
-      <pattern>
-        <marker>
-          <token regexp="yes">(?i).+ct(s)?</token>
-        </marker>
-      </pattern>
-      <message>Ayon sa Manwal sa Masinop na Pagsusulat seksiyon 6.2, ang hiram na salita na nagtatapos sa CT ay dapat matapos sa K imbes na KT.</message>
-      <suggestion><match no="1" regexp_match="(?i)(.+)ct(s)?" regexp_replace="$1k$2" /></suggestion>
-      <example correction="aspek">Siya ay may positibong <marker>aspect</marker> sa buhay.</example>
-      <example correction="aspeks">Maraming <marker>aspects</marker> ang dapat tingnan.</example>
-    </rule>
-  </category>
-
-  <category name="Shao's Rule">
-    <rule id="NG_NANG_ADJ_CHECK" name="Ng vs Nang with Adjectives">
-      <pattern>
-        <token regexp="yes">(?i)tumakbo|lumakad|nagsalita|kumain|sumulat|tumawa|nagluto|tumigil|lumaban|sumigaw</token>
-        <token regexp="yes">siya|ako|ikaw|kami|kayo|sila|tayo|ito</token>
-        <marker>
-          <token>ng</token>
-        </marker>
-        <token regexp="yes">mabilis|mabagal|maayos|malakas|mahina|mabuti|marami|tahimik</token>
-      </pattern>
-      <message>Gamitin ang 'nang' sa halip na 'ng' bilang pang-abay na naglalarawan sa pandiwa.</message>
-      <suggestion>nang</suggestion>
-      <example correction="nang">Tumakbo siya <marker>ng</marker> mabilis.</example>
-      <example>Tumakbo siya nang mabilis.</example>
-    </rule>
-  </category>
-
+	<category name="Shao's Rule">
+		<rule id="NG_NANG_ADJ_CHECK" name="ng (nang)">
+			<pattern case_sensitive="no" mark_from="2">
+				<token regexp="yes">tumakbo|lumakad|nagsalita|kumain|sumulat|tumawa|nagluto|tumigil|lumaban|sumigaw</token>
+				<token regexp="yes">siya|ako|ikaw|kami|kayo|sila|tayo|ito</token>
+				<token>ng</token>
+				<token regexp="yes">mabilis|mabagal|maayos|malakas|mahina|mabuti|marami|tahimik</token>
+			</pattern>
+			<message> Do you mean <suggestion>nang</suggestion>? Gamitin ang 'nang' sa halip na 'ng' bilang pang-abay na naglalarawan sa pandiwa.</message>
+			<short>Ng vs Nang</short>
+			<example correction="nang" type="incorrect">Tumakbo siya <marker>ng</marker> mabilis.</example>
+			<example type="correct">Tumakbo siya <marker>nang</marker> mabilis.</example>
+		</rule>
+	</category>
 </rules>
