@@ -1,84 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GrammarRules>
+<rules lang="tl">
 
-    <rule id="NG_NANG_ADJ_CHECK" name="Ng vs Nang with Adjectives" type="Grammar">
+    <category name="Ng vs Nang">
 
-        <Description>
-            Detects incorrect use of "ng" before adjectives that are not followed by a noun.
-            "ng" should introduce a noun or noun phrase.
-            If an adjective follows "ng" without a noun, "nang" should be used instead.
-            "nang" is correct when it modifies a verb (adverbial use).
-        </Description>
+        <rule id="NG_NANG_ADJ_CHECK" name="Ng vs Nang with Adjectives">
+            <pattern case_sensitive="no">
+                <token regexp="yes">tumakbo|lumakad|nagsalita|kumain|sumulat|tumawa|nagluto|tumigil|kumatakbo|lumaban|sumigaw|tumawid|lumipat|humakbang</token>
+                <token regexp="yes">siya|ako|ikaw|kami|kayo|sila|tayo</token>
+                <token>ng</token>
+                <token regexp="yes">mabilis|mabagal|maayos|malakas|mahina|mabuti|marami|maunti|mahinahon|maingat|matiyaga|masaya|malungkot|biglaan|dahan-dahan|tahimik|maingay</token>
+            </pattern>
+            <message>Gamitin ang &apos;nang&apos; sa halip na &apos;ng&apos; kapag nagbibigay-uring pang-abay sa pandiwa. Do you mean <suggestion><match no="1"/> <match no="2"/> nang <match no="4"/></suggestion>?</message>
+            <short>Ng vs Nang</short>
+            <example correction="Tumakbo siya nang mabilis" type="incorrect">
+                <marker>Tumakbo siya ng mabilis</marker>.
+            </example>
+            <example type="correct">Tumakbo siya nang mabilis.</example>
+            <example type="correct">Bumili siya ng magandang damit.</example>
+        </rule>
 
-        <Examples>
-            <!-- Incorrect: ng + adjective modifying a verb -->
-            <Incorrect>Tumakbo siya ng mabilis.</Incorrect>
-            <Correct>Tumakbo siya nang mabilis.</Correct>
+    </category>
 
-            <Incorrect>Lumakad siya ng mabagal.</Incorrect>
-            <Correct>Lumakad siya nang mabagal.</Correct>
-
-            <Incorrect>Nagsalita siya ng mahinahon.</Incorrect>
-            <Correct>Nagsalita siya nang mahinahon.</Correct>
-
-            <Incorrect>Kumain siya ng marami.</Incorrect>
-            <Correct>Kumain siya nang marami.</Correct>
-
-            <Incorrect>Sumulat siya ng maayos.</Incorrect>
-            <Correct>Sumulat siya nang maayos.</Correct>
-
-            <Incorrect>Tumawa siya ng malakas.</Incorrect>
-            <Correct>Tumawa siya nang malakas.</Correct>
-
-            <Incorrect>Nagluto siya ng mabuti.</Incorrect>
-            <Correct>Nagluto siya nang mabuti.</Correct>
-
-            <Incorrect>Tumigil siya ng biglaan.</Incorrect>
-            <Correct>Tumigil siya nang biglaan.</Correct>
-
-            <!-- Correct: ng + adjective + noun (noun phrase) -->
-            <Correct>Bumili siya ng magandang damit.</Correct>
-            <Correct>Kumuha siya ng malaking kahon.</Correct>
-            <Correct>Naghanap siya ng mababang presyo.</Correct>
-            <Correct>Gusto niya ng masarap na pagkain.</Correct>
-
-            <!-- Correct: ng + mga (plural marker — always valid, never flag) -->
-            <Correct>Bumili siya ng mga damit.</Correct>
-            <Correct>Kumuha siya ng mga bata.</Correct>
-            <Correct>Nagbigay siya ng mga regalo.</Correct>
-            <Correct>Bumili siya ng mga magagandang damit.</Correct>
-        </Examples>
-
-        <Pattern>
-
-			<!-- ALLOWED: ng + mga (plural marker — always valid) -->
-			<Allow find="\bng\s+mga\b" />
-
-			<!-- ALLOWED: ng + adjective + noun (noun phrase) -->
-			<Allow find="\bng\s+(maganda|malaki|maliit|mabilis|mabagal|maayos|malakas|mahina|mabuti|marami|maunti|mahinahon|maingat|matiyaga|masaya|malungkot|magalit|matapang|mahiyain|matalino|mapagkumbaba|masipag|matamis|maasim|mapait|mainit|malamig|malinis|marumi|magaan|mabigat|mataas|mababa|malayo|malapit|matagal|maikli|bago|luma|biglaan|dahan-dahan|tahimik|maingay|maliwanag|madilim|makulay|maputi|maitim|malambot|matigas|makinis|magaspang|masikip|maluwag|mabango|mabaho|mahal|mura|masunurin|mapanghimagsik|mapagmahal|mapagtimpi)\b\s+\w+" />
-
-			<!-- ERROR: ng + adjective ONLY (no noun after) -->
-			<Check type="incorrect_usage"
-				find="\bng\s+(mabilis|mabagal|maayos|malakas|mahina|mabuti|marami|maunti|mahinahon|maingat|matiyaga|masaya|malungkot|magalit|matapang|mahiyain|matalino|mapagkumbaba|masipag|matamis|maasim|mapait|mainit|malamig|malinis|marumi|magaan|mabigat|mataas|mababa|malayo|malapit|matagal|maikli|malaki|maliit|bago|luma|biglaan|dahan-dahan|tahimik|maingay|maliwanag|madilim|makulay|maputi|maitim|malambot|matigas|makinis|magaspang|masikip|maluwag|mabango|mabaho|mahal|mura|masunurin|mapanghimagsik|mapagmahal|mapagtimpi)\b(?!\s+mga\b|\s+\w+)"
-				message="Gamitin ang 'nang' kapag nagbibigay-uring pang-abay sa pandiwa (hal., 'nang mabilis', 'nang maayos'). Use 'nang' when the word after it is an adjective modifying a verb." />
-
-		</Pattern>		
-
-        <Suggestion>
-            Palitan ang "ng" ng "nang" kapag ang susunod na salita ay pang-uri lamang na nagbibigay-uring pang-abay sa pandiwa.
-            Panatilihin ang "ng" kapag nagpapakilala ito ng pangngalan o pariralang pangngalan (hal., 'ng magandang damit', 'ng malaking kahon').
-
-            Replace "ng" with "nang" if the word after it is only an adjective modifying a verb.
-            Keep "ng" if it introduces a noun phrase (e.g., 'ng magandang damit', 'ng malaking kahon').
-        </Suggestion>
-
-        <Notes>
-            - "Nang" is also used before verbs in subordinate clauses (e.g., "nang dumating siya") — this rule does not flag those cases.
-            - Reduplication forms (e.g., "dahan-dahan", "biglaan") are included in the adjective/adverb list.
-            - This rule focuses on adjective-only adverbial use; noun phrases with adjective modifiers are allowed.
-            - "ng mga" is always valid and is never flagged. "Mga" is the plural marker and always introduces a noun phrase (e.g., "ng mga damit", "ng mga magagandang bulaklak").
-        </Notes>
-
-    </rule>
-    
-</GrammarRules>
+</rules>
