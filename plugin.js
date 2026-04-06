@@ -39,7 +39,7 @@ async function runChecker() {
       }
     } catch (e) {
       console.error(e);
-      results.innerHTML = "<b style='color:red;'>Error:</b> Hindi makakonekta. <br/><small>Siguraduhin na bukas ang CMD, CORS extension, at napanood ang 'Secret Handshake' tab.</small>";
+      results.innerHTML = "<b style='color:red;'>Error:</b> Hindi makakonekta. <br/><small>May Error</small>";
     }
   });
 }
