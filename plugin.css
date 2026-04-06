@@ -1,0 +1,3 @@
+body { padding: 15px; font-family: 'Segoe UI'; }
+.ms-Button { cursor: pointer; width: 100%; height: 40px; background: #0078d4; color: white; border: none; }
+#results { margin-top: 15px; font-size: 14px; }
