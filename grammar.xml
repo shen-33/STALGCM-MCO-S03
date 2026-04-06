@@ -32,10 +32,10 @@ title="Easy editing stylesheet" ?>
 	<category name="Shao's Rule">
 		<rule id="NG_NANG_ADJ_CHECK" name="ng (nang)">
 			<pattern case_sensitive="no" mark_from="2">
-				<token regexp="yes">tumakbo|lumakad|nagsalita|kumain|sumulat|tumawa|nagluto|tumigil|lumaban|sumigaw</token>
+				<token regexp="yes">tumakbo|lumakad|nagsalita|kumain|sumulat|tumawa|nagluto|tumigil|lumaban|sumigaw|sumayaw|tumalon|umiyak</token>
 				<token regexp="yes">siya|ako|ikaw|kami|kayo|sila|tayo|ito</token>
 				<token>ng</token>
-				<token regexp="yes">mabilis|mabagal|maayos|malakas|mahina|mabuti|marami|tahimik</token>
+				<token regexp="yes">mabilis|mabagal|maayos|malakas|mahina|mabuti|marami|tahimik|mahinhin|sobra|todo</token>
 			</pattern>
 			<message> Do you mean <suggestion>nang</suggestion>? Gamitin ang 'nang' sa halip na 'ng' bilang pang-abay na naglalarawan sa pandiwa.</message>
 			<short>Ng vs Nang</short>
